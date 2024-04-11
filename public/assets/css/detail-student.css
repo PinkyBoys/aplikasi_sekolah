@@ -1,0 +1,72 @@
+* {
+    /* border: 1px solid red; */
+}
+ul {
+    list-style: none;
+    display: table;
+}
+
+li {
+    display: table-row;
+}
+
+ul li .subtitle {
+    display: table-cell;
+    padding-right: 1rem;
+}
+
+table {
+    margin-left: 1rem;
+}
+
+.right-box {
+    border: 1px solid black;
+    width: 150px; /* Lebar div */
+    height: 40mm; /* Tinggi div */
+}
+
+.right-box.foto {
+    padding: 0.7rem;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.right-box.id {
+    border: 1px solid black;
+    width: 150px;
+    height: 100px;
+}
+
+.right-box.id .d-flex {
+    border-top: 1px solid black;
+    height: 80%;
+}
+
+.right-box.id .d-flex span {
+    display: inline-block;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.numspace {
+    width: 1.5rem;
+}
+
+.spacer {
+    text-align: right;
+}
+
+.title {
+    font-weight: bold;
+    font-size: 1.5rem;
+    display: block;
+    padding: 1rem 0;
+}
+
+.subtitle {
+    font-weight: bold;
+}
+
+table {
+    font-size: 1.1rem;
+}

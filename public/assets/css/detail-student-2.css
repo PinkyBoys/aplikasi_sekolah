@@ -1,0 +1,22 @@
+html,
+body {
+    font-family: "Times New Roman", Times, serif;
+}
+
+/* Hasil Belajar Siswa */
+.title {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.double-underline {
+    border-bottom: 4px double;
+    display: inline-block;
+}
+
+.header-title {
+    display: inline-block;
+    margin: 1rem 1rem 0 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
