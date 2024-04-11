@@ -54,7 +54,22 @@
                                         @php
                                             }
                                         @endphp
-                                        <td></td>
+                                        <td class="text-center">
+                                            <div class="list-icons">
+                                                <div class="dropdown">
+                                                    <a href="#" class="list-icons-item" data-toggle="dropdown">
+                                                        <i class="icon-menu9"></i>
+                                                    </a>
+
+                                                    <div class="dropdown-menu dropdown-menu-left">
+
+                                                        {{--Edit--}}
+                                                        <a href="{{ route('students.view', ['classroom' => $s->classroom->id, 'id' => $s->student_id ]) }}" class="dropdown-item"><i class="icon-eye"></i> View</a>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
                                     </tr>
                                 @endforeach
                             @endif

@@ -58,19 +58,52 @@
             </div> --}}
             <div class="tab-content">
                 <div class="tab-pane fade show active" id="all-classes">
-                    <form action="" method="POST">
+                    <form action="{{ route('classroom.pindah') }}" method="POST">
                         @method('PATCH')
                         @csrf
                         <div class="form-group row">
-                            <select name="class_id" id="clas_id" class="select-search form-control">
-                                <option value=""></option>
-                                @if ($classroomList)
-                                    @foreach ($classroomList as $cl )
-                                        <option value="{{ $cl->id }}">{{ $cl->class_name }}</option>
+                            <label class="col-form-label font-weight-semibold" for="class_id">Kelas<span class="text-danger"></span></label>
+                            <div class="col-lg-3">
+                                <select class="select-search form-control" id="class_id" name="class_id" data-fouc data-placeholder="Choose.." required>
+                                    <option value=""></option>
+                                    @foreach ( $classroomList as $c )
+                                        <option value="{{ $c->id }}">{{ $c->class_name . ' - ' . $c->period }}</option>
                                     @endforeach
-                                @endif
-                            </select>
+                                </select>
+                            </div>
+                            <button class="btn btn-primary col-1">Save</button>
                         </div>
+
+                        <div class="tab-content">
+                            <div class="tab-pane fade show active" id="all-classes">
+                                <table class="table datatable-button-html5-columns">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>NIS/NISN</th>
+                                            <th>Nama Siswa</th>
+                                            <th>Jenis Kelamin</th>
+                                            <th>Status</th>
+                                            <th><input type="checkbox" class="form-check-input" id="selectAllCheckbox"><span>All</span></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if ($students)
+                                            @foreach ($students as $s )
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>{{ $s->student_profile->nis ?? '...' }} / {{ $s->student_profile->nisn ?? '...' }}</td>
+                                                <td>{{ $s->student_profile->name }}</td>
+                                                <td>{{ $s->student_profile->gender }}</td>
+                                                <td>{{ $s->student_profile->status }}</td>
+                                                <td><input type="checkbox" class="form-check-input studentCheckbox" name="selected_students[]" value="{{ $s->student_profile->id }}">
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                        @endif
+                                    </tbody>
+                                </table>
+                            </div>
                     </form>
                 </div>
             </div>
@@ -80,4 +113,22 @@
 
     {{--TimeTable Ends--}}
 
+
 @endsection
+@section('scripts')
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const selectAllCheckbox = document.getElementById('selectAllCheckbox');
+        const studentCheckboxes = document.querySelectorAll('.studentCheckbox');
+
+        // Ketika checkbox "Select All" di klik
+        selectAllCheckbox.addEventListener('change', function() {
+            studentCheckboxes.forEach(function(checkbox) {
+                checkbox.checked = selectAllCheckbox.checked;
+            });
+        });
+
+    });
+</script>
+@endsection
+

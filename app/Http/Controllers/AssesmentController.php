@@ -16,6 +16,7 @@ class AssesmentController extends Controller
         $assessment = Assessment::getAllAssessment();
         $type = [
             'umum' => 'Umum',
+            'mulok' => 'Muatan Lokal',
             'spiritual' => 'Pengembangan Sikap Spiritual & Sosial',
             'ekskul' => 'Pengembangan Diri (Ekstrakulikuler)'
         ];
@@ -39,7 +40,7 @@ class AssesmentController extends Controller
         $this->validate($request,[
             'type' => 'required',
             'name' => 'required',
-            'minimum' => 'required|numeric|between:1,100'
+            'minimum' => 'nullable|numeric|between:1,100'
         ]);
 
         try {
@@ -50,8 +51,8 @@ class AssesmentController extends Controller
 
             return redirect()->route('assessment.index');
         } catch (\Exception $e) {
-            // Session::flash('error', $e->getMessage());
-            Session::flash('error', 'Terjadi kesalahan saat menyimpan data');
+            Session::flash('error', $e->getMessage());
+            // Session::flash('error', 'Terjadi kesalahan saat menyimpan data');
             return back();
         }
 
@@ -74,6 +75,7 @@ class AssesmentController extends Controller
         $assessment = Assessment::getSingleAssessment($id);
         $types = [
             'umum' => 'Umum',
+            'mulok' => 'Muatan Lokal',
             'spiritual' => 'Pengembangan Sikap Spiritual & Sosial',
             'ekskul' => 'Pengembangan Diri (Ekstrakulikuler)'
         ];

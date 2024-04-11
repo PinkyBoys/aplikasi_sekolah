@@ -56,7 +56,6 @@ class StudentProfile extends Model
     }
 
 
-
     public static function getSingleStudent($id)
     {
         return StudentProfile::with('student_guardian:student_id,father_name,mother_name,father_highest_education,mother_highest_education,father_occupation,mother_occupation,student_guardian,relationship,guardian_highest_education,guardian_occupation')

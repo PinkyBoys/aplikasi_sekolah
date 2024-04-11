@@ -76,7 +76,17 @@ class User extends Authenticatable
         return User::with('profile:user_id,name')
             ->select('id', 'username', 'role', 'status')
             ->where('role', 'guru')
+            ->orWhere('role', 'kepala_sekolah')
             ->where('status', true)
             ->get();
+    }
+
+    public static function getRoleKs()
+    {
+        return User::with(['profile:user_id,name','teacher:user_id,nip'])
+            ->select('id', 'username', 'role', 'status')
+            ->where('role', 'kepala_sekolah')
+            ->where('status', true)
+            ->first();
     }
 }

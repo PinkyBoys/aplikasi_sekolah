@@ -94,7 +94,7 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label class="col-lg-3 col-form-label font-weight-semibold">Nilai Minimum (KKM)<span class="text-danger">*</span></label>
+                                    <label class="col-lg-3 col-form-label font-weight-semibold">Nilai Minimum (KKM)<span class="text-danger"></span></label>
                                     <div class="col-lg-9">
                                         <input name="minimum" value="{{ old('minimum') }}" type="number" class="form-control" placeholder="Penilaian Minimum" min="1" max="100">
                                     </div>

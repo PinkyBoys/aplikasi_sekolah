@@ -41,6 +41,11 @@ class Assessment extends Model
         return Assessment::where('status', true)->where('type', 'umum')->get();
     }
 
+    public static function getAssessmentMulok()
+    {
+        return Assessment::where('status', true)->where('type', 'mulok')->get();
+    }
+
     public static function getAssessmentSpiritual()
     {
         return Assessment::where('status', true)->where('type', 'spiritual')->get();

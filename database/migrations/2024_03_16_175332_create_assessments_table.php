@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('assessments', function (Blueprint $table) {
             $table->id();
-            $table->string('type')->nullable();
+            $table->enum('type', ['umum', 'mulok', 'spiritual', 'ekskul' ])->nullable();
             $table->string('name')->nullable();
             $table->string('minimum')->nullable();
             $table->boolean('status')->default(true)->nullable();

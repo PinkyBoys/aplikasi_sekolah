@@ -68,14 +68,15 @@ Route::middleware(['auth', 'multirole:admin,guru,kepala_sekolah'])->group(functi
     Route::get('kelas/{id}', [StudentClassroomController::class,'show'])->name('classroom.view');
     Route::get('kelas/{id}/edit', [ClassroomController::class, 'edit'])->name('classroom.edit');
     Route::patch('kelas/{id}/edit', [ClassroomController::class, 'update'])->name('classroom.update');
+    Route::patch('kelas/pindah-kelas', [ClassroomController::class, 'classChange'])->name('classroom.pindah');
 
     Route::get('kelas/siswa',[StudentClassroomController::class,'index'])->name('student.classroom.index');
     // Route::get('kelas/siswa/{id}',[StudentClassroomController::class,'show'])->name('student.classroom.show');
 
     Route::get('nilai/siswa', [StudentAssessmentController::class, 'index'])->name('student.assessment.index');
     Route::post('nilai/siswa', [StudentAssessmentController::class, 'store'])->name('student.assessment.add');
-    Route::get('nilai/siswa/{id}/view', [StudentAssessmentController::class, 'assessmentList'])->name('student.assessment.view');
     Route::get('nilai/siswa/{id}', [StudentAssessmentController::class, 'assessment'])->name('student.assessment.show');
+    Route::get('nilai/siswa/{id}/view', [StudentAssessmentController::class, 'assessmentList'])->name('student.assessment.view');
 
     Route::get('siswa', [StudentProfileController::class, 'index'])->name('students.index');
     Route::get('siswa/add', [StudentProfileController::class, 'addStudent'])->name('students.add.index');

@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Classroom;
+use App\Models\StudentAssessment;
 use App\Models\StudentClassroom;
 use App\Models\Teacher;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class ClassroomController extends Controller
@@ -114,6 +116,38 @@ class ClassroomController extends Controller
             return redirect()->route('classroom.index');
         } catch (\Exception $e) {
             Session::flash('error', 'Terjadi Kesalahan: ' . $e->getMessage());
+            return back();
+        }
+    }
+
+    public function classChange(Request $request)
+    {
+        $validation = $request->validate([
+            'selected_students.*' => 'required|exists:student_profiles,id',
+        ]);
+
+        if (empty($validation['selected_students'])) {
+            Session::flash('error', 'Pilih setidaknya 1 siswa');
+            return back();
+        }
+
+        try {
+            DB::beginTransaction();
+
+            $input = $request->all();
+            $classId = $input['class_id'];
+
+            foreach ($validation['selected_students'] as $studentId) {
+                StudentClassroom::where('student_id', $studentId)->update(['class_id' => $classId]);
+                StudentAssessment::where('student_id', $studentId)->update(['class_id' => $classId]);
+            }
+
+            DB::commit();
+            Session::flash('success', 'Berhasil Pindah Kelas');
+            return redirect()->route('classroom.index');
+        } catch (\Exception $e) {
+            DB::rollback();
+            Session::flash('error', $e->getMessage());
             return back();
         }
     }

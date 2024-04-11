@@ -1,5 +1,6 @@
 * {
     /* border: 1px solid red; */
+    font-size: 0.9rem;
 }
 ul {
     list-style: none;
@@ -59,14 +60,28 @@ table {
 .title {
     font-weight: bold;
     font-size: 1.5rem;
-    display: block;
-    padding: 1rem 0;
+    margin: 1rem 0;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    border-bottom: 4px double black;
 }
 
 .subtitle {
     font-weight: bold;
 }
 
-table {
-    font-size: 1.1rem;
+table tr,
+table tr td {
+    height: 0.2rem;
+}
+
+.sp-2 {
+    padding: 0.1rem 0;
+    display: inline-block;
+}
+
+.sp-3 {
+    display: block;
+    font-weight: bold;
 }

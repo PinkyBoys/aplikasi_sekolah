@@ -56,12 +56,23 @@ class StudentClassroom extends Model
             ->get();
     }
 
+
     public static function getClassroom()
     {
         return StudentClassroom::selectRaw('class_id, period, count(*) as student_count')
             ->with(['classroom:id,class_name,grade'])
             ->groupBy('class_id', 'period')
             ->get();
+    }
+
+    public static function getFinalAssessment($classroom, $id)
+    {
+        return StudentClassroom::with(['classroom' => function ($query) use ($classroom){
+            $query->where('id', $classroom);
+        }, 'student_profile'=> function ($query) use ($id){
+            $query->where('id', $id);
+        }, 'classroom.teacher.user.profile'])
+        ->first();
     }
 
     public static function getLatestClassrooms()
@@ -71,7 +82,7 @@ class StudentClassroom extends Model
                 ->select('student_classrooms.*')
                 ->orderBy('classrooms.grade', 'desc')
                 ->orderBy('classrooms.period', 'desc')
-                ->groupBy('student_classrooms.student_id','student_classrooms.id', 'student_classrooms.id','student_classrooms.class_id','student_classrooms.created_at','student_classrooms.')
+                ->groupBy('student_classrooms.student_id','student_classrooms.id', 'student_classrooms.id','student_classrooms.class_id','student_classrooms.created_at','student_classrooms.updated_at')
                 ->get();
     }
 

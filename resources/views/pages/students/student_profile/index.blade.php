@@ -46,6 +46,8 @@
                                             $studentClassroom = $classrooms->where('student_id', $s->id)->first();
                                         @endphp
                                         <td>{{ $studentClassroom ? $studentClassroom->classroom->class_name : '' }}</td>
+                                    @else
+                                        <td></td>
                                     @endif
                                     <td>{{ $s->status }}</td>
                                     <td class="text-center">

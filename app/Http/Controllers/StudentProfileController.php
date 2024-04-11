@@ -8,6 +8,7 @@ use App\Models\StudentAssessment;
 use App\Models\StudentClassroom;
 use App\Models\StudentGuardian;
 use App\Models\StudentProfile;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -129,17 +130,24 @@ class StudentProfileController extends Controller
 
     public function singleStudent($classroom, $id )
     {
-        $student = StudentProfile::getSingleStudent($id);
+        $student = StudentClassroom::getFinalAssessment($classroom, $id);
         $umum = Assessment::getAssessmentUmum();
+        $mulok = Assessment::getAssessmentMulok();
+        $spiritual = Assessment::getAssessmentSpiritual();
+        $ekskul = Assessment::getAssessmentEkskul();
+        $ks = User::getRoleKs();
 
+        // dd($classroom);
         if(!$student){
             abort(404);
         }
 
+        dd($student);
+
         $assessments = StudentAssessment::SingleStudentAssessment($classroom, $id);
 
 
-        return view('pages.students.student_details.hasil-belajar-siswa', compact('student', 'umum', 'assessments'));
+        return view('pages.students.student_details.hasil-belajar-siswa', compact('student', 'umum', 'mulok', 'spiritual', 'ekskul', 'assessments','ks'));
     }
 
     /**
