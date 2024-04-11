@@ -56,5 +56,9 @@ class Classroom extends Model
             ->get();
     }
 
+    public static function classList()
+    {
+        return Classroom::get();
+    }
 
 }

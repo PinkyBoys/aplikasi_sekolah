@@ -67,12 +67,19 @@ class StudentClassroom extends Model
 
     public static function getFinalAssessment($classroom, $id)
     {
-        return StudentClassroom::with(['classroom' => function ($query) use ($classroom){
-            $query->where('id', $classroom);
-        }, 'student_profile'=> function ($query) use ($id){
-            $query->where('id', $id);
-        }, 'classroom.teacher.user.profile'])
-        ->first();
+        // return StudentClassroom::with(['classroom' => function ($query) use ($classroom){
+        //     $query->where('id', $classroom);
+        // }, 'student_profile'=> function ($query) use ($id){
+        //     $query->where('id', $id);
+        // }, 'classroom.teacher.user.profile'])
+        // ->first();
+
+        return StudentClassroom::with(['classroom', 'student_profile'])
+            ->whereHas('classroom', function ($query) use ($classroom){
+                $query->where('id', $classroom);
+            })
+            ->where('student_id', $id)
+            ->first();
     }
 
     public static function getLatestClassrooms()

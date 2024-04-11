@@ -65,6 +65,7 @@ Route::middleware(['auth', 'multirole:admin,kepala_sekolah'])->group(function ()
 Route::middleware(['auth', 'multirole:admin,guru,kepala_sekolah'])->group(function () {
     Route::get('kelas', [ClassroomController::class, 'index'])->name('classroom.index');
     Route::post('kelas', [ClassroomController::class, 'store'])->name('classroom.add');
+    Route::post('kelas/baru',[ClassroomController::class,'addNew'])->name('classroom.new');
     Route::get('kelas/{id}', [StudentClassroomController::class,'show'])->name('classroom.view');
     Route::get('kelas/{id}/edit', [ClassroomController::class, 'edit'])->name('classroom.edit');
     Route::patch('kelas/{id}/edit', [ClassroomController::class, 'update'])->name('classroom.update');

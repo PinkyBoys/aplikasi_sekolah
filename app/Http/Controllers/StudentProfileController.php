@@ -142,7 +142,7 @@ class StudentProfileController extends Controller
             abort(404);
         }
 
-        dd($student);
+        // dd($student);
 
         $assessments = StudentAssessment::SingleStudentAssessment($classroom, $id);
 

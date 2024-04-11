@@ -90,7 +90,7 @@ class AssesmentController extends Controller
         $this->validate($request,[
             'type' => 'required',
             'name' => 'required',
-            'minimum' => 'required|numeric|between:1,100'
+            'minimum' => 'nullable|numeric|between:1,100'
         ]);
 
         $assesment = Assessment::getSingleAssessment($id);
