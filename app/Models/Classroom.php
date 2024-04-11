@@ -39,6 +39,11 @@ class Classroom extends Model
         return Classroom::where('id', $id)->first();
     }
 
+    public static function changeClassList($grade)
+    {
+        return Classroom::where('grade', $grade)->get();
+    }
+
     public static function classroomList()
     {
         return Classroom::with(['teacher.user.profile:id,user_id,name', 'teacher'])

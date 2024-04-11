@@ -67,17 +67,12 @@ class StudentClassroom extends Model
     public static function getLatestClassrooms()
     {
         return StudentClassroom::with(['classroom:id,grade,class_name,period', 'student_profile:id'])
-                ->whereHas('classroom', function ($query){
-                    $query->whereRaw('classrooms.grade = (select MAX(grade) from classrooms)');
-                })
-                ->whereHas('classroom', function($query){
-                    $query->whereRaw('classrooms.period = (select MAX(period) from classrooms where classrooms.grade = classrooms.grade)');
-                });
+                ->join('classrooms', 'student_classrooms.class_id', '=', 'classrooms.id')
+                ->select('student_classrooms.*')
+                ->orderBy('classrooms.grade', 'desc')
+                ->orderBy('classrooms.period', 'desc')
+                ->groupBy('student_classrooms.student_id','student_classrooms.id', 'student_classrooms.id','student_classrooms.class_id','student_classrooms.created_at','student_classrooms.')
+                ->get();
     }
-
-
-
-
-
 
 }

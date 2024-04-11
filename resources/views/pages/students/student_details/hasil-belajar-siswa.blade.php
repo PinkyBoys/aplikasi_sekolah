@@ -61,14 +61,14 @@
                         @php
                             $semester_1 = $assessments->where('assesment_id', $u->id)->where('semester', '1')->first();
                         @endphp
-                        <td>{{ $semester_1->score_num ?? '' }}</td>
-                        <td>{{ $semester_1->score_let ?? '' }}</td>
+                        <td class="{{ $semester_1->score_num < $u->minimum ? 'text-danger' : '' }}">{{ $semester_1->score_num ?? '' }}</td>
+                        <td class="{{ $semester_1->score_num < $u->minimum ? 'text-danger' : '' }}">{{ $semester_1->score_let ?? '' }}</td>
                         <td>{{ $u->minimum }}</td>
                         @php
                         $semester_2 = $assessments->where('assesment_id', $u->id)->where('semester', '2')->first();
                         @endphp
-                        <td>{{ $semester_2->score_num ?? '' }}</td>
-                        <td>{{ $semester_2->score_let ?? '' }}</td>
+                        <td class="{{ $semester_2->score_num < $u->minimum ? 'text-danger' : '' }}">{{ $semester_2->score_num ?? '' }}</td>
+                        <td class="{{ $semester_2->score_num < $u->minimum ? 'text-danger' : '' }}">{{ $semester_2->score_let ?? '' }}</td>
                     </tr>
                 @endforeach
             </tbody>

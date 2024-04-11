@@ -138,7 +138,6 @@ class StudentProfileController extends Controller
 
         $assessments = StudentAssessment::SingleStudentAssessment($classroom, $id);
 
-        // $count = StudentAssessment::count('assesment_id')->where();
 
         return view('pages.students.student_details.hasil-belajar-siswa', compact('student', 'umum', 'assessments'));
     }
@@ -146,9 +145,10 @@ class StudentProfileController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(StudentProfile $studentProfile)
+    public function show($id)
     {
-        //
+        $student = StudentProfile::getSingleStudent($id);
+        return view('pages.students.student_details.detail', compact('student'));
     }
 
     /**

@@ -41,14 +41,12 @@
                                     <td>{{ $s->nis ?? '...' }} / {{ $s->nisn ?? '...' }}</td>
                                     <td>{{ $s->name }}</td>
                                     <td>{{ $s->gender }}</td>
-                                    {{-- <td>{{ $s->student_classroom }}</td> --}}
-                                    @php
-                                        $latest = $classrooms->whereHas('student_profile', function ($query) use ($s){
-                                            $query->where('id', $s->id);
-                                        })
-                                        ->first();
-                                    @endphp
-                                    <td>{{ $latest->classroom->id }}</td>
+                                    @if ($classrooms)
+                                        @php
+                                            $studentClassroom = $classrooms->where('student_id', $s->id)->first();
+                                        @endphp
+                                        <td>{{ $studentClassroom ? $studentClassroom->classroom->class_name : '' }}</td>
+                                    @endif
                                     <td>{{ $s->status }}</td>
                                     <td class="text-center">
                                         <div class="list-icons">
@@ -59,8 +57,8 @@
 
                                                 <div class="dropdown-menu dropdown-menu-left">
 
-                                                    <a href="{{ route('students.view', ['classroom' => $latest->classroom->id, 'id' => $s->id]) }}" class="dropdown-item"><i class="icon-eye"></i> View</a>
-                                                    {{-- <a href="{{ route('students.edit', $s->id) }}" class="dropdown-item"><i class="icon-pencil"></i> Edit</a> --}}
+                                                    <a href="{{ route('students.view', ['classroom' => $studentClassroom->class_id, 'id' => $s->id]) }}" class="dropdown-item"><i class="icon-eye"></i> Hasil Belajar Terbaru</a>
+                                                    <a href="{{ route('students.profile', $s->id) }}" class="dropdown-item"><i class="icon-eye"></i> Profil Siswa</a>
 
                                                 </div>
                                             </div>

@@ -77,10 +77,6 @@
                                 <a href="{{ route('classroom.index') }}" class="nav-link
                                 {{ (Route::is('classroom.index')) ? 'active' : ''}}">Daftar Kelas</a>
                             </li>
-                            <li class="nav-item">
-                                <a href="{{ route('student.classroom.index') }}" class="nav-link
-                                {{ (Route::is('student.classroom.index')) ? 'active' : ''}}">Kelas Siswa</a>
-                            </li>
                         </ul>
                     </li>
                     <li class="nav-item nav-item-submenu {{ in_array(Route::currentRouteName(), ['assessment.index', 'score.index', 'student.assessment.index' ]) ? 'nav-item-expanded nav-item-open' : '' }}" >

@@ -78,11 +78,10 @@ Route::middleware(['auth', 'multirole:admin,guru,kepala_sekolah'])->group(functi
     Route::get('nilai/siswa/{id}', [StudentAssessmentController::class, 'assessment'])->name('student.assessment.show');
 
     Route::get('siswa', [StudentProfileController::class, 'index'])->name('students.index');
-    Route::get('siswa/{classroom}/{id}/view', [StudentProfileController::class, 'singleStudent'])->name('students.view');
-
     Route::get('siswa/add', [StudentProfileController::class, 'addStudent'])->name('students.add.index');
     Route::post('siswa/add', [StudentProfileController::class, 'store'])->name('students.add');
-    // Route::get('siswa/{id}/edit', [StudentProfileController::class, 'edit'])->name('students.edit');
+    Route::get('siswa/{id}', [StudentProfileController::class, 'show'])->name('students.profile');
+    Route::get('siswa/{classroom}/{id}/nilai-akhir', [StudentProfileController::class, 'singleStudent'])->name('students.view');
     // Route::patch('siswa/{id}/edit', [StudentProfileController::class, 'update'])->name('students.update');
     // Route::delete('siswa/{id}/delete', [StudentProfileController::class, 'destroy'])->name('students.destroy');
 });

@@ -44,12 +44,14 @@ class StudentClassroomController extends Controller
     {
         $students = StudentClassroom::getStudentClassroom($id);
         $classroom = Classroom::getSingleClass($id);
+        $classroomList = Classroom::changeClassList($classroom->grade);
+        // dd($classroomList);
 
         if(!$classroom){
             return abort(404);
         }
 
-        return view('pages.class.student_classroom.view',compact('students', 'classroom'));
+        return view('pages.class.student_classroom.view',compact('students', 'classroom', 'classroomList'));
     }
 
     /**
